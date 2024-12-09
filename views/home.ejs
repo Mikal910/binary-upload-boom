@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise Finder</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+   <!-- Navigation Bar -->
+   <nav class="navbar">
+    <div class="navbar-container">
+      <a href="/" class="navbar-logo">BodyMorph</a>
+      <ul class="navbar-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile">My Profile</a></li>
+        <li><a href="/myexercise">My Exercises</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/logout">Logout</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <body>
+    <div class="container">
+      <h1>Exercise List</h1>
+      <!-- Filter form for selecting exercise type and body type -->
+      <form id="filter-form">
+        <!--Little dropdown menu-->
+        <label for="exercise-type">Exercise Type:</label>
+        <select id="exercise-type">
+          <option value="">All</option>
+          <option value="cardio">Cardio</option>
+          <option value="olympic weightlifting">Olympic Weightlifting</option>
+          <option value="plyometrics">Plyometrics</option>
+          <option value="powerlifting">Powerlifting</option>
+          <option value="strength">Strength</option>
+          <option value="stretching">Stretching</option>
+          <option value="strongman">Strongman</option>
+        </select>
+        <!--Little dropdown menu-->
+        <label for="body-type">Body Type:</label>
+        <select id="body-type">
+          <option value="">All</option>
+          <option value="ectomorph">Ectomorph</option>
+          <option value="mesomorph">Mesomorph</option>
+          <option value="endomorph">Endomorph</option>
+          <option value="all body types">All body types</option>
+        </select>
+        <!-- Dropdown for Muscle Type -->
+        <label for="muscle-type">Muscle Type:</label>
+        <select id="muscle-type">
+          <option value="">All</option>
+          <option value="abdominals">Abdominals</option>
+          <option value="adductors">Adductors</option>
+          <option value="biceps">Biceps</option>
+          <option value="calves">Calves</option>
+          <option value="chest">Chest</option>
+          <option value="forearms">Forearms</option>
+          <option value="glutes">Glutes</option>
+          <option value="hamstrings">Hamstrings</option>
+          <option value="lats">Lats</option>
+          <option value="lower_back">Lower Back</option>
+          <option value="middle_back">Middle Back</option>
+          <option value="neck">Neck</option>
+          <option value="shoulders">Shoulders</option>
+          <option value="quadriceps">Quadriceps</option>
+          <option value="traps">Traps</option>
+          <option value="triceps">Triceps</option>
+        </select>
+        <button type="submit">Filter</button>
+      </form>
+
+      <div id="exercise-list">
+        <% workouts.forEach(exercise => { %>
+        <div class="exercise">
+          <h2><%= exercise.name %></h2>
+          <p class="type"><%= exercise.type %></p>
+          <p class="body-type"><%= exercise['body-type'] %></p>
+          <p class="muscle"><%= exercise.muscle %></p>
+          <p class="equipment"><%= exercise.equipment %></p>
+          <p class="difficulty"><%= exercise.difficulty %></p>
+          <h3>Instructions:</h3>
+          <ul>
+            <% exercise.instructions.forEach(instr => { %>
+            <li><%= instr %></li>
+            <% }); %>
+          </ul>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <script src="/main.js"></script>
+  </body>
+</html>

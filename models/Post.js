@@ -1,34 +1,42 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
+  Name: {
     type: String,
     required: true,
   },
-  image: {
+  Height: {
     type: String,
-    require: true,
+    required: true, 
   },
-  cloudinaryId: {
+  Weight: {
     type: String,
-    require: true,
+    required: true, 
   },
-  caption: {
+  BodyType: {
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
+  WorkoutType: {
+    type: String,
     required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  savedWorkouts: [
+    {
+      name: { type: String, required: true },
+      type: { type: String },
+      bodytype: { type: String }, 
+      muscle: { type: String },
+      equipment: { type: String },
+      difficulty: { type: String },
+      instructions: { type: [String] },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Post", PostSchema);
+

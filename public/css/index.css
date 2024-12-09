@@ -1,0 +1,123 @@
+/* General body styling with gradient background */
+body {
+    background: linear-gradient(-45deg, #b3b3b3, #808080, #4d4d4d, #1a1a1a); /* Gray gradient colors */
+    background-size: 300% 300%; /* Smooth animation */
+    animation: gradientAnimation 5s ease infinite; /* Continuous animation */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff; /* White text for readability */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content */
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Main Content Styling */
+main.container {
+    text-align: center;
+    animation: fadeIn 1.5s ease; /* Smooth fade-in effect */
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header Styling */
+header h1 {
+    font-size: 50px; /* Larger font for impact */
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #ffffff; /* Start with white text */
+    background: linear-gradient(to right, #ffffff, #808080); /* Subtle gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Text fill with gradient */
+    position: relative;
+}
+
+header h1:after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(to right, #ffffff, #808080); /* Gradient underline */
+    margin: 10px auto 0;
+    border-radius: 2px; /* Rounded underline */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for underline */
+}
+
+/* Tagline Styling */
+header span {
+    font-size: 20px; /* Slightly larger tagline font */
+    color: #d6d6d6; /* Subtle gray for tagline */
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    font-style: italic; /* Add a soft style */
+}
+
+/* Button Group */
+.row {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between buttons */
+    align-items: center;
+}
+
+.row a {
+    text-decoration: none;
+    color: #ffffff;
+    background: #4d4d4d; /* Dark gray button */
+    padding: 15px 40px; /* Larger padding for better visuals */
+    border-radius: 30px; /* Circular button shape */
+    font-size: 18px; /* Bigger font size */
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Smooth button shadow */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.row a:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    background: #808080; /* Lighter gray on hover */
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 20px;
+    color: #d6d6d6;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+    .row {
+        flex-direction: row; /* Align buttons horizontally on larger screens */
+        gap: 30px;
+    }
+}

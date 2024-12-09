@@ -1,5 +1,7 @@
+// const { getHome } = require("./profile");
+
 module.exports = {
-  getIndex: (req, res) => {
+  getindex: (req, res) => {
     res.render("index.ejs");
   },
 };

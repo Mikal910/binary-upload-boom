@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Exercises</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="/" class="navbar-logo">BodyMorph</a>
+        <ul class="navbar-links">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/profile">My Profile</a></li>
+          <li><a href="/myexercise">My Exercises</a></li>
+          <li><a href="/calendar">Calendar</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>My Saved Exercises</h1>
+      <div id="saved-exercises">
+        <% if (groupedWorkouts && Object.keys(groupedWorkouts).length > 0) { %>
+          <% for (let group in groupedWorkouts) { %>
+            <div class="workout-group">
+              <h2><%= group %></h2>
+              <div class="workouts">
+                <% groupedWorkouts[group].forEach(workout => { %>
+                  <div class="exercise" data-id="<%= workout._id %>">
+                    <h2><%= workout.name %></h2>
+                    <p><strong>Type:</strong> <%= workout.type %></p>
+                    <p><strong>Body Type:</strong> <%= workout.bodytype %></p>
+                    <p><strong>Muscle:</strong> <%= workout.muscle %></p>
+                    <p><strong>Equipment:</strong> <%= workout.equipment %></p>
+                    <p><strong>Difficulty:</strong> <%= workout.difficulty %></p>
+                    <h3>Instructions:</h3>
+                    <ul>
+                      <% workout.instructions.forEach(instr => { %>
+                        <li><%= instr %></li>
+                      <% }); %>
+                    </ul>
+                    <!-- Delete Button -->
+                    <button class="delete-workout-btn" data-id="<%= workout._id %>">Delete</button>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+        <% } else { %>
+          <p>No saved workouts yet. Start exploring and saving!</p>
+        <% } %>
+      </div>
+    </div>
+    <script src="/main.js"></script>
+  </body>
+</html>

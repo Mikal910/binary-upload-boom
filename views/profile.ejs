@@ -1,46 +1,99 @@
-<%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="/" class="navbar-logo">BodyMorph</a>
+        <ul class="navbar-links">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/profile"> My Profile</a></li>
+          <li><a href="/myexercise">My Exercises</a></li>
+          <li><a href="/calendar">Calendar</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/logout">Logout</a></li>
+
         </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>My Profile</h1>
+      <form id="profile-form" method="post" action="/profile/update/<%= user._id %>?_method=PUT">
+        <!-- Name -->
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= user.userName || '' %>"
+          placeholder="Enter your name"
+          required
+        />
+
+        <!-- Height -->
+        <label for="height">Height:</label>
+        <select id="height" name="height" required>
+          <option value="">Select Height</option>
+          <% for (let feet = 4; feet <= 7; feet++) { %>
+            <% for (let inches = 0; inches < 12; inches++) { %>
+              <option
+                value="<%= feet %>&apos;<%= inches %>&quot;"
+                <%= user.height === `${feet}'${inches}"` ? 'selected' : '' %>
+              >
+                <%= feet %>'<%= inches %>"
+              </option>
+            <% } %>
+          <% } %>
+        </select>
+
+        <!-- Weight -->
+        <label for="weight">Weight:</label>
+        <select id="weight" name="weight" required>
+          <option value="">Select Weight (lbs)</option>
+          <% for (let i = 50; i <= 400; i++) { %>
+            <option value="<%= i %>" <%= user.weight == i ? 'selected' : '' %>>
+              <%= i %> lbs
+            </option>
+          <% } %>
+        </select>
+
+        <!-- Body Type -->
+        <label for="bodyType">Body Type:</label>
+        <select id="bodyType" name="bodytype" required>
+          <option value="ectomorph" <%= user.bodytype === 'ectomorph' ? 'selected' : '' %>>Ectomorph</option>
+          <option value="mesomorph" <%= user.bodytype === 'mesomorph' ? 'selected' : '' %>>Mesomorph</option>
+          <option value="endomorph" <%= user.bodytype === 'endomorph' ? 'selected' : '' %>>Endomorph</option>
+        </select>
+
+        <!-- Workout Type -->
+        <label for="workoutType">Workout Type:</label>
+        <select id="workoutType" name="workouttype" required>
+          <option value="strength" <%= user.workouttype === 'strength' ? 'selected' : '' %>>Strength</option>
+          <option value="cardio" <%= user.workouttype === 'cardio' ? 'selected' : '' %>>Cardio</option>
+          <option value="flexibility" <%= user.workouttype === 'flexibility' ? 'selected' : '' %>>Flexibility</option>
+          <option value="mixed" <%= user.workouttype === 'mixed' ? 'selected' : '' %>>Mixed</option>
+          <option value="stretching" <%= user.workouttype === 'stretching' ? 'selected' : '' %>>Stretching</option>
+          <option value="strongman" <%= user.workouttype === 'strongman' ? 'selected' : '' %>>Strongman</option>
+          <option value="olympic weightlifting" <%= user.workouttype === 'olympic weightlifting' ? 'selected' : '' %>>Olympic Weightlifting</option>
+        </select>
+
+        <!-- Weight Goal -->
+        <label for="weightGoal">Weight Goal:</label>
+        <select id="weightGoal" name="weightgoal" required>
+          <option value="maintain" <%= user.weightgoal === 'maintain' ? 'selected' : '' %>>Maintain</option>
+          <option value="gain" <%= user.weightgoal === 'gain' ? 'selected' : '' %>>Gain</option>
+          <option value="lose" <%= user.weightgoal === 'lose' ? 'selected' : '' %>>Lose</option>
+        </select>
+
+        <button type="submit">Save Profile</button>
+      </form>
     </div>
-  </div>
-</div>
-<%- include('partials/footer') -%>
+  </body>
+</html>
